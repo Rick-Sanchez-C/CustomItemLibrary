@@ -1,6 +1,7 @@
 
 plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 
@@ -131,7 +132,7 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.19.2-43.2.8'
-    implementation 'org.yaml:snakeyaml:2.0'
+    shadow  'org.yaml:snakeyaml:2.0'
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
@@ -159,7 +160,22 @@ jar {
         ])
     }
 }
+shadowJar {
+    configurations = [project.configurations.shadow]
+    archiveClassifier.set('') // Elimina el sufijo '-all' del JAR resultante
+    mergeServiceFiles() // Fusiona los archivos de servicios si es necesario
 
+    // Opcional: Si deseas minimizar el tamaño del JAR resultante, puedes eliminar archivos no necesarios
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/license.txt'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/notice.txt'
+    exclude 'META-INF/ASL2.0'
+}
+build.dependsOn shadowJar
 jar.finalizedBy('reobfJar')
 
 tasks.withType(JavaCompile).configureEach {

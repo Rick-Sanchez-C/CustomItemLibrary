@@ -19,7 +19,7 @@ public class SimpleCustomItem {
     private ItemStack createCustomItemStack(String itemID, int amount, int customModelData) {
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemID));
         if (item == null) {
-            System.out.println("El item con ID " + itemID + " no existe.");
+            System.out.println("This item: " + itemID + " does not exist.");
             return ItemStack.EMPTY;
         }
 

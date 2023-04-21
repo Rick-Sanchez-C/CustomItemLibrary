@@ -38,42 +38,13 @@ import java.util.Map;
 @Mod(CustomItemLibrary.MODID)
 public class CustomItemLibrary {
 
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "customitemlibrary";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
     public CustomItemLibrary() {
-        // Registra el evento de inicialización del mod
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::setup);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // Carga los elementos personalizados desde el archivo customitems.yml
-        loadCustomItems();
-    }
-    private void loadCustomItems() {
-        // Ruta del archivo customitems.yml
-        Path configPath = Paths.get("ItemLibrary/customitems.yml");
-
-        Yaml yaml = new Yaml();
-        try (InputStream input = Files.newInputStream(configPath)) {
-            Map<String, Map<String, Object>> data = yaml.load(input);
-
-            for (Map.Entry<String, Map<String, Object>> entry : data.entrySet()) {
-                String key = entry.getKey();
-                Map<String, Object> itemData = entry.getValue();
-
-                String itemID = (String) itemData.get("itemID");
-                int amount = (Integer) itemData.get("amount");
-                int customModelData = (Integer) itemData.get("customModelData");
-
-                SimpleCustomItem customItem = new SimpleCustomItem(itemID, amount, customModelData);
-                CustomItemRegistry.getInstance().registerCustomItem(key, customItem);
-            }
-        } catch (IOException e) {
-            System.err.println("No se pudo cargar el archivo customitems.yml");
-            e.printStackTrace();
-        }
+        CustomItemRegistry.getInstance();
     }
 }

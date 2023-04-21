@@ -39,6 +39,7 @@ import java.util.Map;
 public class CustomItemLibrary {
 
     public static final String MODID = "customitemlibrary";
+
     public CustomItemLibrary() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::setup);

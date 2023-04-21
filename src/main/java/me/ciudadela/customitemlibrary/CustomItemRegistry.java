@@ -59,7 +59,7 @@ public class CustomItemRegistry {
         try {
             Files.createDirectories(configDir);
             if (Files.notExists(configPath)) {
-                String defaultConfig = "example_item:\n  itemID: \"minecraft:stone\"\n  amount: 1\n  customModelData: 1000\n";
+                String defaultConfig = "example_item:\n  itemID: \"minecraft:stone\"\n  customModelData: 1000\n";
                 Files.write(configPath, defaultConfig.getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
@@ -73,10 +73,9 @@ public class CustomItemRegistry {
         Map<String, Object> itemData = entry.getValue();
 
         String itemID = (String) itemData.get("itemID");
-        int amount = (Integer) itemData.get("amount");
         int customModelData = (Integer) itemData.get("customModelData");
 
-        SimpleCustomItem customItem = new SimpleCustomItem(itemID, amount, customModelData);
+        SimpleCustomItem customItem = new SimpleCustomItem(itemID, customModelData);
         registerCustomItem(key, customItem);
     }
 }

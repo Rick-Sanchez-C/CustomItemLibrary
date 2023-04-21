@@ -8,15 +8,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class SimpleCustomItem {
     final String itemID;
-    final int amount;
     final int CustomModelData;
 
-    public SimpleCustomItem(String itemID, int amount, int CustomModelData) {
+    public SimpleCustomItem(String itemID) {
         this.itemID = itemID;
-        this.amount = amount;
+        this.CustomModelData = 0;
+    }
+    public SimpleCustomItem(String itemID, int CustomModelData) {
+        this.itemID = itemID;
         this.CustomModelData = CustomModelData;
     }
-    private ItemStack createCustomItemStack(String itemID, int amount, int customModelData) {
+    public ItemStack createCustomItemStack(int amount) {
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemID));
         if (item == null) {
             System.out.println("This item: " + itemID + " does not exist.");
@@ -24,9 +26,9 @@ public class SimpleCustomItem {
         }
 
         ItemStack stack = new ItemStack(item, amount);
-        if (customModelData != 0) {
+        if (CustomModelData != 0) {
             CompoundTag tag = stack.getOrCreateTag();
-            tag.putInt("CustomModelData", customModelData);
+            tag.putInt("CustomModelData", CustomModelData);
         }
         return stack;
     }

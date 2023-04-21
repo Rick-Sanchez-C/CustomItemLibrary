@@ -13,7 +13,7 @@ CustomItemLibrary is a Minecraft Forge library mod that provides an easy way to 
 
 ```gradle
 dependencies {
-    implementation fg.deobf("com.example:SimpleCustomItem:1.0.0")
+    implementation files(Libs/CustomItemLibrary-1.0.0.jar)
 }
 ```
 Replace com.example and 1.0.0 with the correct group ID and version of SimpleCustomItem.

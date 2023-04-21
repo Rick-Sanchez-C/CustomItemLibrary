@@ -1,7 +1,6 @@
 # CustomItemLibrary
 
-CustomItemLibrary is a Minecraft Forge library mod that provides an easy way to define and register custom items with specific properties, such as custom model data. This library allows modders to create and manage custom items through a user-friendly YAML configuration file, without having to manually modify their code.
-
+CustomItemLibrary is a Minecraft Forge library mod that provides an easy way to define and register custom items with specific properties, such as custom model data. This library allows server owners to manage custom items through a unique user-friendly YAML configuration file for all the plugins.
 ## Features
 
 - Define custom items with item ID, amount, and custom model data through a YAML configuration file

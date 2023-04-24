@@ -33,7 +33,9 @@ public class CustomItemRegistry {
     }
 
     public SimpleCustomItem getCustomItem(String key) {
-        return customItems.get(key);
+        if (customItems.containsKey(key))
+            return customItems.get(key);
+        return new SimpleCustomItem(key, 0);
     }
 
     private void loadConfig() {
